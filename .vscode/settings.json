@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "helloWorld.C": "cpp"
+        "helloWorld.C": "cpp",
+        "ostream": "cpp"
     }
 }
