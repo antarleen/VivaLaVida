@@ -1,18 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int compress()
+string compress()
 {
-    vector<string> chars = {"a", "a", "b", "b", "c", "c", "c"};
+    vector<string> chars = {"a", "b", "c", "d"};
     // your code goes here
-    vector<string> compressed_chars;
-    int i = 1;
-    int len = size(chars);
+    string compressed_chars;
+    int i = 0;
+    int len = chars.size();
     int count = 1;
     string current_letter = chars[0];
-    while (i < len - 1)
+    for (int i = 1; i < len; i++)
     {
-        i++;
+        // cout << chars[i] << endl;
         if (current_letter == chars[i])
         {
             count++;
@@ -21,28 +21,42 @@ int compress()
         {
             if (count == 1)
             {
-                compressed_chars.push_back(current_letter);
+                compressed_chars += current_letter;
             }
             else
             {
-                compressed_chars.push_back(current_letter);
-                string c_count;
-                c_count.push_back(count);
-                cout << count;
-                compressed_chars.push_back(c_count);
+                compressed_chars += current_letter;
+                // cout << current_letter << " " << count << endl;
+                compressed_chars += to_string(count);
             }
             current_letter = chars[i];
             count = 1;
         }
     }
 
-    for (auto c : compressed_chars)
+    if (count == 1)
     {
-        cout << c << " ";
+        compressed_chars += current_letter;
+        // cout << current_letter << " " << count << endl;
     }
-    return 0;
-}
+    else
+    {
+        compressed_chars += current_letter;
+        // cout << current_letter << " " << count << endl;
+        compressed_chars += to_string(count);
+    }
 
+    //  Convert string vectors to a single string.
+
+    // std::string collapsedString = std::accumulate(compressed_chars.begin(), compressed_chars.end(), std::string(),
+    //                                               [](const std::string &a, const std::string &b)
+    //                                               {
+    //                                                   return a + "" + b;
+    //                                               });
+
+    cout << compressed_chars << endl;
+    return compressed_chars;
+}
 
 int main()
 {
