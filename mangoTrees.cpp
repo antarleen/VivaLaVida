@@ -77,34 +77,36 @@ int mangoTrees(int arr[][4], int m, int n)
     //     cout << endl;
     // }
 
-    cout << " The prefix sum array is:" << endl;
+    // cout << " The prefix sum array is:" << endl;
 
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            cout << treeSumArr[i][j] << " ";
-        }
-        cout << endl;
-    }
+    // for (int i = 0; i < m; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //     {
+    //         cout << treeSumArr[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
 
     // Print the number of trees in reach subset
 
     int maxTrees = INT_MIN;
 
-    for (int i = 1; i < m; i++)
+    for (int i = 1; i < m - 1; i++)
     {
-        for (int j = 1; j < n; j++)
+        int leftUpper = 0, rightUpper = 0, leftDown = 0, rightDown = 0;
+        for (int j = 1; j < n - 1; j++)
         {
             //  Number of trees in the left upper subset
             int leftUpper = treeSumArr[i - 1][j - 1];
             // Number of trees in the right upper subset
-            int rightUpper = treeSumArr[i][n] - leftUpper;
+            int rightUpper = treeSumArr[i][n - 1] - leftUpper;
             // Number of trees in the left down subset
-            int leftDown = treeSumArr[m][j - 1] - leftUpper;
+            int leftDown = treeSumArr[m - 1][j - 1] - leftUpper;
             // Number of trees in the right down subset
-            int rightDown = treeSumArr[m][j] - rightUpper - leftDown - leftUpper;
+            int rightDown = treeSumArr[m - 1][j] - rightUpper - leftDown + leftUpper;
 
+            cout << leftUpper << " " << rightUpper << " " << leftDown << " " << rightDown << endl;
             maxTrees = max(maxTrees, min({leftDown, rightDown, leftUpper, rightUpper}));
         }
     }
